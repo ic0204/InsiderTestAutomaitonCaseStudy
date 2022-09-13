@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Insider Test Automation Case Study">
+    <test name="TestAutomation">
+        <classes>
+            <class name="MySteps">
+                <methods>
+                    <parameter name="Browser" value="chrome"/>
+                    <include name="initializeDriver"/>
+
+                    <parameter name="URL" value="https://useinsider.com/"/>
+                    <include name="gotoURL"/>
+
+                    <parameter name="SeePage" value="home"/>
+                    <parameter name="acceptAllForCookies" value="Accept All button for Cookies"/>
+                    <include name="checkHomePage"/>
+
+                    <parameter name="moreItem" value="More button"/>
+                    <include name="clickAnItemFromMenuForMoreItem"/>
+
+                    <parameter name="careerItemFromNavigationBar" value="Careers button"/>
+                    <include name="clickCareersFromMenu"/>
+
+                    <parameter name="careerPage" value="career"/>
+                    <include name="checkCareerPage"/>
+
+                    <parameter name="locationTitle" value="Location title"/>
+                    <include name="isOpenedLocationTittleOnTheCareerPage"/>
+
+                    <parameter name="teamTitle" value="Teams title"/>
+                    <include name="isOpenedTeamTitleOnTheCareerPage"/>
+
+                    <parameter name="lifeAtInsiderTitle" value="Life at Insider title"/>
+                    <include name="isOpenedLifeAtInsiderTitleOnTheCareerPage"/>
+
+                    <parameter name="seeAllTeamButton" value="See all teams button"/>
+                    <parameter name="qAItem" value="Quality Assurance button"/>
+                    <parameter name="seeAllQaJobsButton" value="See all QA jobs button"/>
+                    <include name="goToQualityAssurancePage"/>
+
+                    <parameter name="qaPage" value="quality assurance pages"/>
+                    <parameter name="seeAllQaJobs" value="See all QA jobs button"/>
+                    <include name="seeAllQaJobs"/>
+
+                    <parameter name="openPosition" value="open position"/>
+                    <parameter name="closedLocationDropBox" value="closed Location DropBox"/>
+                    <parameter name="openedLocationDropBox" value="opened Location DropBox"/>
+                    <include name="filteringQaJobsLocatedInIstanbul"/>
+                    
+                    <parameter name="qAPosition" value="QA Assurance Engineer Position button"/>
+                    <parameter name="applyButton" value="Apply Now button for QA Assurance Engineer Position"/>
+                    <include name="selectQAPositionLocatedInIstanbul"/>
+
+
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+</suite>
