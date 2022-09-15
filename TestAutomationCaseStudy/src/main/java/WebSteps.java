@@ -162,9 +162,15 @@ public class WebSteps implements MainSteps {
     public void selectDropDownBoxItem(String element,int index ){
         WebElement object = findElement(element,0);
         Select dropBoxItem = new Select(object);
-        //dropBoxItem.selectByIndex(index);
-
-
+        dropBoxItem.selectByVisibleText("Istanbul, Turkey");
+    }
+    public  void goToNewTab(){
+        for (String handle : driver.getWindowHandles()) {
+            if(!driver.getWindowHandle().equals(handle)) {
+                driver.switchTo().window(handle);
+                return;
+            }
+        }
     }
 
 

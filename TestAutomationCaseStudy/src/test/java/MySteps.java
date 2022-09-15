@@ -1,7 +1,3 @@
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.testng.ITestListener;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.Assert;
@@ -116,6 +112,8 @@ public class MySteps extends BasePage {
     public void selectQAPositionLocatedInIstanbul(String qAPosition,String applyButton)throws InterruptedException{
         websteps.clickElement(qAPosition,0);
         websteps.clickElement(applyButton,0);
+        websteps.goToNewTab();
+        Assert.assertEquals(websteps.driver.getTitle(),"Insider. - Software Quality Assurance Engineer");
         System.out.println("You Are Lover Application Page");
     }
 
