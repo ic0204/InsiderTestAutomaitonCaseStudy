@@ -1,7 +1,12 @@
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.Assert;
 import pages.BasePage;
+
+import java.io.IOException;
 
 
 public class MySteps extends BasePage {
@@ -85,7 +90,6 @@ public class MySteps extends BasePage {
         System.out.println("Open the Insider Quality Assurance Job Opportunities Page");
 
 
-
     }
 
     @Parameters({"qaPage", "seeAllQaJobs"})
@@ -98,25 +102,37 @@ public class MySteps extends BasePage {
 
     }
 
-    @Parameters({"openPosition", "closedLocationDropBox","openedLocationDropBox"})
+    @Parameters({"openPosition", "closedLocationDropBox", "openedLocationDropBox"})
     @Test(priority = 12)
-    public void filteringQaJobsLocatedInIstanbul(String openPosition, String closedLocationDropBox, String openedLocationDropBox ) throws InterruptedException {
+    public void filteringQaJobsLocatedInIstanbul(String openPosition, String closedLocationDropBox, String openedLocationDropBox) throws InterruptedException {
         websteps.seePage(openPosition);
         websteps.clickElement(closedLocationDropBox, 0);
-        websteps.selectDropDownBoxItem(openedLocationDropBox,3);
+        websteps.selectDropDownBoxItem(openedLocationDropBox, 3);
     }
 
 
-    @Parameters({"qAPosition","applyButton"})
+    @Parameters({"qAPosition", "applyButton"})
     @Test(priority = 13)
-    public void selectQAPositionLocatedInIstanbul(String qAPosition,String applyButton)throws InterruptedException{
-        websteps.clickElement(qAPosition,0);
-        websteps.clickElement(applyButton,0);
-        websteps.goToNewTab();
-        Assert.assertEquals(websteps.driver.getTitle(),"Insider. - Software Quality Assurance Engineer");
-        System.out.println("You Are Lover Application Page");
+    public void selectQAPositionLocatedInIstanbul(String qAPosition, String applyButton) throws InterruptedException {
+        websteps.clickElement(qAPosition, 0);
+        websteps.clickElement(applyButton, 0);
+        websteps.goToOtherTab();
+        Assert.assertEquals(websteps.driver.getTitle(), "Insider. - Software Quality Assurance Engineer");
+        System.out.println("We are in Lever Application Page");
     }
 
+    @AfterMethod
+    public void tearDown(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            WebSteps.takeScreenShot(websteps.driver, result.getName());
+        }
+    }
 
+    @AfterSuite
+    public void closeBrowser() throws IOException {
+        Runtime.getRuntime().exec("taskkill /F /IM " + websteps.browserExe);
+        System.out.println(" All tabs are closed.");
+
+    }
 
 }

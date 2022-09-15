@@ -1,36 +1,36 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.*;
+import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-
 import org.openqa.selenium.support.ui.Select;
-
 import pages.*;
 
-
+import java.io.File;
 
 
 public class WebSteps implements MainSteps {
     public WebDriver driver;
     public BasePage page;
+    public String browserExe;
 
     public void initializeDriver(String browser) {
         if (browser.equals("chrome")) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
             options.addArguments("--disable-notifications");
+            browserExe="Chrome.exe";
             WebDriverManager.chromedriver().setup();
-            //System.setProperty("webdriver.chrome.driver", FileSystems.getDefault().getPath("").toAbsolutePath().toString() + "\\chromedriver_win32\\chromedriver.exe");
             driver = new ChromeDriver(options);
         } else if (browser.equals("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("--start-maximized");
             options.addArguments("--disable-notifications");
+            browserExe="Firefox.exe";
             WebDriverManager.firefoxdriver().setup();
-           // System.setProperty("webdriver.gecko.driver", FileSystems.getDefault().getPath("").toAbsolutePath().toString() + "\\geckodriver\\geckodriver.exe");
             driver = new FirefoxDriver();
         }
     }
@@ -164,7 +164,7 @@ public class WebSteps implements MainSteps {
         Select dropBoxItem = new Select(object);
         dropBoxItem.selectByVisibleText("Istanbul, Turkey");
     }
-    public  void goToNewTab(){
+    public  void goToOtherTab(){
         for (String handle : driver.getWindowHandles()) {
             if(!driver.getWindowHandle().equals(handle)) {
                 driver.switchTo().window(handle);
@@ -172,8 +172,17 @@ public class WebSteps implements MainSteps {
             }
         }
     }
+    public static void takeScreenShot(WebDriver driver, String screenshotName){
+        try {
+            TakesScreenshot screenshot = ((TakesScreenshot)driver);
+            File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(srcFile, new File("./screenshots/" + screenshotName + ".png"));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-
-
+    }
 
 }
