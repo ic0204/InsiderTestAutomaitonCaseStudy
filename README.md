@@ -1,4 +1,4 @@
-# InsiderTestAutomaitonCaseStudy
+# Insider Test Automaiton Case Study
 
 When you want to see the result of UI test automation;
  * Run testng.xml file
