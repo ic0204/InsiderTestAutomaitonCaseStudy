@@ -1,0 +1,7 @@
+pages\BasePage.class
+pages\OpenPositionsPage.class
+MainSteps.class
+pages\QualityAssurancePage.class
+pages\HomePage.class
+WebSteps.class
+pages\CareersPage.class
